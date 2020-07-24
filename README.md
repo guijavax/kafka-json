@@ -1,1 +1,1 @@
-"# kafka-json" 
+# kafka-json
