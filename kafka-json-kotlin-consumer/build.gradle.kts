@@ -22,6 +22,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("com.google.code.gson:gson:2.8.5")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	runtimeOnly("org.postgresql:postgresql:42.2.5")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

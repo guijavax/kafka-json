@@ -1,4 +1,4 @@
-package com.example.api.kafkajsonkotlinconsumer.pessoa
+package com.example.api.kafkajsonkotlinconsumer.dto
 
 
 data class Pessoa(

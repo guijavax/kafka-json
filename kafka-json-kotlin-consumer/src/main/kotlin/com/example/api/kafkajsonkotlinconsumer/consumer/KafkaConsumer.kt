@@ -1,10 +1,7 @@
 package com.example.api.kafkajsonkotlinconsumer.consumer
 
-import com.example.api.kafkajsonkotlinconsumer.pessoa.Pessoa
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.example.api.kafkajsonkotlinconsumer.dto.Pessoa
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
