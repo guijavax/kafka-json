@@ -2,3 +2,11 @@ bootstrap:
   servers: localhost:9092
 server:
   port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/crud_kafka?createDatabaseIfNotExist=true&useSSL=false
+    username: guiborges
+    password: root
+  driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
