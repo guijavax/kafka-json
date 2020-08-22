@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.lang.Exception
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/person")
@@ -27,11 +28,11 @@ class PersonController {
     lateinit var topic : String
 
     @PostMapping("/post")
-    fun post(@RequestBody person : Person) : ResponseEntity<Any> {
+    fun post(@Valid @RequestBody person : Person) : ResponseEntity<Any> {
         val producer = kafkaConfig.producer()
 
         val node = ObjectMapper().valueToTree<JsonNode>(person)
-        val record :ProducerRecord<String, JsonNode> = ProducerRecord<String, JsonNode>(topic, node)
+        val record : ProducerRecord<String, JsonNode> = ProducerRecord<String, JsonNode>(topic, node)
 
         return try {
             producer.send(record) { metadata: RecordMetadata?, exception: Exception? ->
