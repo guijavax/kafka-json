@@ -5,5 +5,7 @@ import org.apache.kafka.clients.producer.KafkaProducer
 
 interface KafkaConfig {
 
-    fun producer() : KafkaProducer<String, JsonNode>
+    fun producerJson() : KafkaProducer<String, JsonNode>
+
+    fun producerString() : KafkaProducer<String, String>
 }

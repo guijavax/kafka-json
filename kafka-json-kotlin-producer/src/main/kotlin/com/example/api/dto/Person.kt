@@ -1,13 +1,14 @@
 package com.example.api.dto
 
-import org.jetbrains.annotations.NotNull
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.*
 
 
 data class Person(
         @field:NotBlank(message = "\${name.notblank}")
         val name : String,
+
+        @field:NotNull(message = "\${cpf.notblank}")
         val cpf : Long,
+
         val idade : Int
 )
