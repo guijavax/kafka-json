@@ -7,8 +7,8 @@ data class Person(
         @field:NotBlank(message = "\${name.notblank}")
         val name : String,
 
-        @field:NotNull(message = "\${cpf.notblank}")
-        val cpf : Long,
+        @field:NotBlank(message = "\${cpf.notblank}")
+        var cpf : String,
 
         val idade : Int
 )

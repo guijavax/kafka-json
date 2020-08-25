@@ -31,7 +31,4 @@ class KafkaConfigImpl : KafkaConfig {
 
     @Bean
     override fun producerJson() : KafkaProducer<String, JsonNode> = KafkaProducer(config("json"))
-
-    @Bean
-    override fun producerString(): KafkaProducer<String, String> = KafkaProducer(config("string"))
 }

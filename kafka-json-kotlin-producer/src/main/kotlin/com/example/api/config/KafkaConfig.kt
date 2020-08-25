@@ -7,5 +7,4 @@ interface KafkaConfig {
 
     fun producerJson() : KafkaProducer<String, JsonNode>
 
-    fun producerString() : KafkaProducer<String, String>
 }
