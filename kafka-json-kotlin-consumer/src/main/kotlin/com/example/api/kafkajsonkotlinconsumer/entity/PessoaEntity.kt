@@ -18,7 +18,7 @@ data class PessoaEntity(
 
         @Column(name = "cpf")
         @NotNull
-        val cpf : Long,
+        val cpf : String,
 
         @Column(name = "idade")
         @NotNull
