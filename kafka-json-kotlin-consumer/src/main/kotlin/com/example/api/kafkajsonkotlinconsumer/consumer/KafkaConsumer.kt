@@ -31,7 +31,7 @@ class KafkaConsumer {
         val record = data.value() as String
         val pessoa : Pessoa = Gson().fromJson(record, Pessoa::class.java)
 
-        service.insert(PessoaEntity(null, pessoa.name, pessoa.cpf, pessoa.idade))
+        this.callInsert(PessoaEntity(null, pessoa.name, pessoa.cpf, pessoa.idade))
 
         LOGGER.info(pessoa.toString())
     }
@@ -41,7 +41,12 @@ class KafkaConsumer {
         val gson = Gson()
         val pessoaJson = JsonParser().parse(message)
         val  pessoa = gson.fromJson(pessoaJson, Pessoa::class.java)
+
+        this.callInsert(PessoaEntity(null, pessoa.name, pessoa.cpf, pessoa.idade))
         LOGGER.info(pessoa.name)
     }
 
+    private fun callInsert(pessoa : PessoaEntity) {
+        service.insert(pessoa)
+    }
 }
