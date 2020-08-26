@@ -18,6 +18,10 @@ class PersonController {
     @Value("\${topic-person}")
     lateinit var topic : String
 
+    @Value("\${topic-person-string}")
+    lateinit var topicString : String
+
+
     @Autowired
     private lateinit var sendToKafka : SendToKafka
 
@@ -25,12 +29,12 @@ class PersonController {
     fun post(@Valid @RequestBody person : Person, @PathVariable(name="type") type : String) : ResponseEntity<Any> {
         val sizeCpf = person.cpf.toString().length
         if (validaCpf(sizeCpf)) return ResponseEntity.badRequest().body("Tamanho de cpf invalido")
+        person.cpf = Util.removeSpecialCaracterFromString(person.cpf)
         return try {
-            person.cpf = Util.removeSpecialCaracterFromString(person.cpf)
             if (type == "json") {
                 sendToKafka.sendToKafkaJson(topic, person)
             } else {
-                sendToKafka.sendToKafkaString(topic, person.toString())
+                sendToKafka.sendToKafkaString(topicString, person.toString())
             }
             ResponseEntity.ok().build()
         } catch (e : Exception) {

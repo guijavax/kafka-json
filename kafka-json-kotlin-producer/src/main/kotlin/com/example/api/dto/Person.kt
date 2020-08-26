@@ -11,4 +11,9 @@ data class Person(
         var cpf : String,
 
         val idade : Int
-)
+) {
+	override fun toString() : String {
+	  return "{\"name\": \"$name\", \"cpf\":\"$cpf\", \"idade\": \"$idade\"}" 	
+	}
+	
+}

@@ -23,7 +23,7 @@ class SendToKafkaImpl : SendToKafka {
 
     override fun sendToKafkaJson(topic : String, obj : Any) {
         val node = ObjectMapper().valueToTree<JsonNode>(obj)
-        val record : ProducerRecord<String, JsonNode> = ProducerRecord<String, JsonNode>(topic, node)
+        val record : ProducerRecord<String, JsonNode> = ProducerRecord(topic, node)
 
         producerJson().send(record) { metadata: RecordMetadata?, exception: Exception? ->
             println(exception ?: metadata)
