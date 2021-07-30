@@ -12,35 +12,19 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/person")
-class PersonController {
-
+class PersonController(val sendToKafka: SendToKafka) {
 
     @Value("\${topic-person}")
     lateinit var topic : String
 
-    @Value("\${topic-person-string}")
-    lateinit var topicString : String
-
-
-    @Autowired
-    private lateinit var sendToKafka : SendToKafka
-
-    @PostMapping("/post/{type}")
-    fun post(@Valid @RequestBody person : Person, @PathVariable(name="type") type : String) : ResponseEntity<Any> {
-        val sizeCpf = person.cpf.toString().length
-        if (validaCpf(sizeCpf)) return ResponseEntity.badRequest().body("Tamanho de cpf invalido")
+    @PostMapping("/post}")
+    fun post(@Valid @RequestBody person : Person) : ResponseEntity<Any> {
         person.cpf = Util.removeSpecialCaracterFromString(person.cpf)
         return try {
-            if (type == "json") {
-                sendToKafka.sendToKafkaJson(topic, person)
-            } else {
-                sendToKafka.sendToKafkaString(topicString, person.toString())
-            }
+            sendToKafka.sendToKafkaJson(topic, person)
             ResponseEntity.ok().build()
         } catch (e : Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Problema ao enviar mensagem")
         }
     }
-
-    private fun validaCpf(sizeCpf: Int): Boolean = sizeCpf != 13
 }
